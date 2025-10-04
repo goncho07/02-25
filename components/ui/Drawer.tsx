@@ -1,7 +1,7 @@
 import React, { useEffect, ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
-import { useFocusTrap } from '../hooks/useFocusTrap';
+import { useFocusTrap } from '../../hooks/useFocusTrap';
 
 interface DrawerProps {
   isOpen: boolean;
