@@ -1,15 +1,16 @@
 
 
-import { LucideProps } from "lucide-react";
+import type { LucideIcon } from 'lucide-react';
 import React from "react";
+import { AppRoute } from './config/routes';
 
 export type UserStatus = 'Activo' | 'Inactivo' | 'Suspendido' | 'Egresado' | 'Pendiente';
 export type Sede = 'Norte' | 'Sur';
 
-export interface NavItem {
-  to: string;
-  text: string;
-  icon: React.ComponentType<LucideProps>;
+export interface NavigationItemConfig {
+  path: AppRoute;
+  labelKey: string;
+  icon: LucideIcon;
 }
 
 export interface Student {

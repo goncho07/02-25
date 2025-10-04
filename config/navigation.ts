@@ -1,0 +1,56 @@
+import {
+  BookCheck,
+  BookOpen,
+  Briefcase,
+  Calendar,
+  ClipboardCheck,
+  ClipboardList,
+  Edit,
+  FileSpreadsheet,
+  Flag,
+  GraduationCap,
+  HelpCircle,
+  History,
+  Home,
+  MessageSquare,
+  QrCode,
+  Settings,
+  ShieldCheck,
+  Users,
+  UsersRound,
+  Warehouse,
+} from 'lucide-react';
+import { NavigationItemConfig } from '../types';
+import { ROUTES } from './routes';
+
+export const DIRECTOR_NAVIGATION: NavigationItemConfig[] = [
+  { path: ROUTES.director.dashboard, labelKey: 'navigation.director.dashboard', icon: Home },
+  { path: ROUTES.director.users, labelKey: 'navigation.director.users', icon: UsersRound },
+  { path: ROUTES.director.enrollment, labelKey: 'navigation.director.enrollment', icon: Users },
+  { path: ROUTES.director.academic, labelKey: 'navigation.director.academic', icon: BookOpen },
+  { path: ROUTES.director.academicProgress, labelKey: 'navigation.director.academicProgress', icon: GraduationCap },
+  { path: ROUTES.director.courseMonitoring, labelKey: 'navigation.director.courseMonitoring', icon: Calendar },
+  { path: ROUTES.director.studentMonitoring, labelKey: 'navigation.director.studentMonitoring', icon: Flag },
+  { path: ROUTES.director.certificates, labelKey: 'navigation.director.certificates', icon: ClipboardList },
+  { path: ROUTES.director.downloads, labelKey: 'navigation.director.downloads', icon: FileSpreadsheet },
+  { path: ROUTES.director.academicSettings, labelKey: 'navigation.director.academicSettings', icon: BookCheck },
+  { path: ROUTES.director.attendance, labelKey: 'navigation.director.attendance', icon: ClipboardCheck },
+  { path: ROUTES.director.attendanceScanner, labelKey: 'navigation.director.attendanceScanner', icon: QrCode },
+  { path: ROUTES.director.communications, labelKey: 'navigation.director.communications', icon: MessageSquare },
+  { path: ROUTES.director.reports, labelKey: 'navigation.director.reports', icon: FileSpreadsheet },
+  { path: ROUTES.director.resources, labelKey: 'navigation.director.resources', icon: Warehouse },
+  { path: ROUTES.director.admin, labelKey: 'navigation.director.admin', icon: Briefcase },
+  { path: ROUTES.director.settings, labelKey: 'navigation.director.settings', icon: Settings },
+  { path: ROUTES.director.roles, labelKey: 'navigation.director.roles', icon: ShieldCheck },
+  { path: ROUTES.director.activityLog, labelKey: 'navigation.director.activityLog', icon: History },
+  { path: ROUTES.director.help, labelKey: 'navigation.director.help', icon: HelpCircle },
+  { path: ROUTES.director.coexistence, labelKey: 'navigation.director.coexistence', icon: Flag },
+];
+
+export const TEACHER_NAVIGATION: NavigationItemConfig[] = [
+  { path: ROUTES.teacher.dashboard, labelKey: 'navigation.teacher.dashboard', icon: Home },
+  { path: ROUTES.teacher.gradeEntry, labelKey: 'navigation.teacher.gradeEntry', icon: Edit },
+  { path: ROUTES.teacher.gradebook, labelKey: 'navigation.teacher.gradebook', icon: BookCheck },
+  { path: ROUTES.teacher.communications, labelKey: 'navigation.teacher.communications', icon: MessageSquare },
+  { path: ROUTES.teacher.help, labelKey: 'navigation.teacher.help', icon: HelpCircle },
+];
