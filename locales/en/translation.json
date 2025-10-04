@@ -112,6 +112,13 @@
     },
     "tag": {
       "removeLabel": "Remove tag"
+    },
+    "userListHeader": {
+      "placeholder": "Search (name, ID, role, grade: 5A)…",
+      "aria": {
+        "addFilter": "Add search filter",
+        "removeFilter": "Remove filter {{filter}}"
+      }
     }
   }
 }

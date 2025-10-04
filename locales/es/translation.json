@@ -112,6 +112,13 @@
     },
     "tag": {
       "removeLabel": "Quitar etiqueta"
+    },
+    "userListHeader": {
+      "placeholder": "Buscar (nombre, DNI, rol, grado: 5A)…",
+      "aria": {
+        "addFilter": "Añadir filtro de búsqueda",
+        "removeFilter": "Quitar filtro {{filter}}"
+      }
     }
   }
 }
