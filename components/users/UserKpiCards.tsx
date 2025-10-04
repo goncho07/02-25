@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import KpiCard from '../../ui/KpiCard';
+import KpiCard from '../ui/KpiCard';
 import { GenericUser, Staff, Student, ParentTutor } from '../../types';
 import { Shield, GraduationCap, User, Users2, Users } from 'lucide-react';
 
