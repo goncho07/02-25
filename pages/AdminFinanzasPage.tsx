@@ -6,7 +6,7 @@ import { track } from '../analytics/track';
 // New Architecture Components
 import ModulePage from '../layouts/ModulePage';
 import Button from '../ui/Button';
-import KpiCard from '../ui/KpiCard';
+import KpiCard from '../components/ui/KpiCard';
 import Table from '../ui/Table';
 import Drawer from '../ui/Drawer';
 

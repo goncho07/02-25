@@ -149,7 +149,7 @@ const Header: React.FC = () => {
                 <p className="text-sm text-slate-500 dark:text-slate-400">Ángel G. Morales</p>
               </div>
               <a href="#/usuarios" onClick={() => setProfileOpen(false)} className="flex items-center gap-3 px-4 py-3 text-base text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"><User size={20} /> Perfil</a>
-              <a href="#/settings" className="flex items-center gap-3 px-4 py-3 text-base text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"><Settings size={20} /> Ajustes</a>
+              <a href="#/settings" onClick={() => setProfileOpen(false)} className="flex items-center gap-3 px-4 py-3 text-base text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"><Settings size={20} /> Ajustes</a>
               <button onClick={handleLogout} className="w-full text-left flex items-center gap-3 px-4 py-3 text-base text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition-colors">
                 <LogOut size={20} /> Cerrar Sesión
               </button>
