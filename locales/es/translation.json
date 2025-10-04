@@ -1,0 +1,90 @@
+{
+  "branding": {
+    "institutionName": "IEE 6049 Ricardo Palma",
+    "logoAlt": "Logo del colegio"
+  },
+  "navigation": {
+    "director": {
+      "dashboard": "Inicio",
+      "users": "Usuarios",
+      "enrollment": "Matrícula",
+      "academic": "Académico",
+      "academicProgress": "Avance Docente",
+      "courseMonitoring": "Monitoreo de Cursos",
+      "studentMonitoring": "Monitoreo de Estudiantes",
+      "certificates": "Actas y Certificados",
+      "downloads": "Reportes y Descargas",
+      "academicSettings": "Configuración Académica",
+      "attendance": "Asistencia",
+      "attendanceScanner": "Escáner QR",
+      "communications": "Comunicaciones",
+      "reports": "Reportes",
+      "resources": "Recursos",
+      "admin": "Administración y Finanzas",
+      "settings": "Configuración",
+      "roles": "Gestión de Roles",
+      "activityLog": "Registro de Actividades",
+      "help": "Ayuda",
+      "coexistence": "Convivencia"
+    },
+    "teacher": {
+      "dashboard": "Inicio",
+      "gradeEntry": "Registrar Notas",
+      "gradebook": "Libro de Calificaciones",
+      "communications": "Comunicaciones",
+      "help": "Ayuda"
+    }
+  },
+  "auth": {
+    "roles": {
+      "director": "Director(a)",
+      "teacher": "Docente"
+    },
+    "login": {
+      "changeRole": "Cambiar rol",
+      "dniLabel": "DNI o usuario",
+      "dniPlaceholder": {
+        "director": "Usuario: director",
+        "teacher": "Usuario: docente"
+      },
+      "passwordLabel": "Contraseña",
+      "passwordPlaceholder": "Contraseña: password",
+      "submit": "Ingresar",
+      "invalidCredentials": "Credenciales incorrectas. Intente de nuevo.",
+      "title": {
+        "director": "Acceso directivo",
+        "teacher": "Acceso docente"
+      }
+    },
+    "accessType": {
+      "heading": "Selecciona tu tipo de acceso"
+    }
+  },
+  "header": {
+    "notifications": "Notificaciones",
+    "markAllAsRead": "Marcar todas como leídas",
+    "empty": "No tienes notificaciones nuevas.",
+    "profile": "Perfil",
+    "settings": "Ajustes",
+    "logout": "Cerrar sesión",
+    "connection": {
+      "online": "En línea",
+      "offline": "Sin conexión"
+    },
+    "aria": {
+      "toggleSidebar": "Alternar barra lateral",
+      "toggleTheme": "Cambiar tema"
+    }
+  },
+  "notifications": {
+    "minutesAgo": "hace {{time}}",
+    "action": "Ver"
+  },
+  "status": {
+    "online": "En línea",
+    "offline": "Sin conexión"
+  },
+  "placeholders": {
+    "newUser": "Nuevo usuario"
+  }
+}

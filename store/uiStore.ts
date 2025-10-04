@@ -1,44 +1,40 @@
 import { create } from 'zustand';
+import { THEME, ThemeMode } from '../config';
 
-type Theme = 'light' | 'dark';
+const applyTheme = (theme: ThemeMode) => {
+  if (theme === THEME.dark) {
+    document.documentElement.classList.add(THEME.dark);
+  } else {
+    document.documentElement.classList.remove(THEME.dark);
+  }
+  localStorage.setItem(THEME.storageKey, theme);
+};
 
 interface UIState {
   isSidebarCollapsed: boolean;
-  theme: Theme;
+  theme: ThemeMode;
   isCommandMenuOpen: boolean;
   toggleSidebar: () => void;
   setSidebarCollapsed: (isCollapsed: boolean) => void;
-  setTheme: (theme: Theme) => void;
+  setTheme: (theme: ThemeMode) => void;
   toggleTheme: () => void;
   setCommandMenuOpen: (isOpen: boolean) => void;
 }
 
 export const useUIStore = create<UIState>((set) => ({
   isSidebarCollapsed: false,
-  theme: 'light',
+  theme: THEME.light,
   isCommandMenuOpen: false,
   toggleSidebar: () => set((state) => ({ isSidebarCollapsed: !state.isSidebarCollapsed })),
   setSidebarCollapsed: (isCollapsed) => set({ isSidebarCollapsed: isCollapsed }),
   setTheme: (theme) => {
+    applyTheme(theme);
     set({ theme });
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
   },
   toggleTheme: () =>
     set((state) => {
-      const newTheme = state.theme === 'light' ? 'dark' : 'light';
-      if (newTheme === 'dark') {
-        document.documentElement.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
-      }
+      const newTheme = state.theme === THEME.light ? THEME.dark : THEME.light;
+      applyTheme(newTheme);
       return { theme: newTheme };
     }),
   setCommandMenuOpen: (isOpen) => set({ isCommandMenuOpen: isOpen }),

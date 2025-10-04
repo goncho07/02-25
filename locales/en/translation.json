@@ -1,0 +1,90 @@
+{
+  "branding": {
+    "institutionName": "IEE 6049 Ricardo Palma",
+    "logoAlt": "School logo"
+  },
+  "navigation": {
+    "director": {
+      "dashboard": "Home",
+      "users": "Users",
+      "enrollment": "Enrollment",
+      "academic": "Academic",
+      "academicProgress": "Teacher Progress",
+      "courseMonitoring": "Course Monitoring",
+      "studentMonitoring": "Student Monitoring",
+      "certificates": "Certificates",
+      "downloads": "Reports & Downloads",
+      "academicSettings": "Academic Settings",
+      "attendance": "Attendance",
+      "attendanceScanner": "QR Scanner",
+      "communications": "Communications",
+      "reports": "Reports",
+      "resources": "Resources",
+      "admin": "Administration & Finance",
+      "settings": "Settings",
+      "roles": "Role Management",
+      "activityLog": "Activity Log",
+      "help": "Help",
+      "coexistence": "Coexistence"
+    },
+    "teacher": {
+      "dashboard": "Home",
+      "gradeEntry": "Grade Entry",
+      "gradebook": "Gradebook",
+      "communications": "Communications",
+      "help": "Help"
+    }
+  },
+  "auth": {
+    "roles": {
+      "director": "Principal",
+      "teacher": "Teacher"
+    },
+    "login": {
+      "changeRole": "Change role",
+      "dniLabel": "ID or username",
+      "dniPlaceholder": {
+        "director": "Username: director",
+        "teacher": "Username: docente"
+      },
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Password: password",
+      "submit": "Sign in",
+      "invalidCredentials": "Invalid credentials. Try again.",
+      "title": {
+        "director": "Principal access",
+        "teacher": "Teacher access"
+      }
+    },
+    "accessType": {
+      "heading": "Select your access type"
+    }
+  },
+  "header": {
+    "notifications": "Notifications",
+    "markAllAsRead": "Mark all as read",
+    "empty": "You do not have new notifications.",
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Sign out",
+    "connection": {
+      "online": "Online",
+      "offline": "Offline"
+    },
+    "aria": {
+      "toggleSidebar": "Toggle sidebar",
+      "toggleTheme": "Toggle theme"
+    }
+  },
+  "notifications": {
+    "minutesAgo": "{{time}} ago",
+    "action": "View"
+  },
+  "status": {
+    "online": "Online",
+    "offline": "Offline"
+  },
+  "placeholders": {
+    "newUser": "New user"
+  }
+}
