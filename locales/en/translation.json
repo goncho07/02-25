@@ -86,5 +86,32 @@
   },
   "placeholders": {
     "newUser": "New user"
+  },
+  "ui": {
+    "breadcrumbs": {
+      "ellipsis": "…",
+      "ariaLabel": "Breadcrumb"
+    },
+    "calendar": {
+      "noData": "No events",
+      "dayLabel": "{{date}}. {{eventsList}}"
+    },
+    "dialog": {
+      "cancel": "Cancel",
+      "confirm": "Confirm"
+    },
+    "drawer": {
+      "closeLabel": "Close panel"
+    },
+    "chart": {
+      "noData": "No data available"
+    },
+    "search": {
+      "placeholder": "Search by name, ID or role… ({{shortcut}})",
+      "aria": "Search by name, ID or role"
+    },
+    "tag": {
+      "removeLabel": "Remove tag"
+    }
   }
 }

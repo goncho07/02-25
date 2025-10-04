@@ -186,7 +186,7 @@ export interface SearchTag {
 export interface CalendarEvent {
   id: string;
   title: string;
-  date: string; // YYYY-MM-DD
+  date: string | Date; // Normalized to yyyy-MM-dd when rendered
   category: 'Examen' | 'Feriado' | 'Reunión' | 'Actividad' | 'UGEL' | 'Gestión' | 'Cívico';
   description?: string;
 }

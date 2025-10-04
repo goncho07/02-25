@@ -11,38 +11,61 @@ import {
   startOfMonth,
   startOfWeek,
 } from 'date-fns';
-import es from 'date-fns/locale/es';
+import type { Locale } from 'date-fns';
+import esLocale from 'date-fns/locale/es';
+import { useTranslation } from 'react-i18next';
 import { CalendarEvent } from '../../types';
-import { eventCategoryColors } from '../../config';
+import { eventCategoryColors as defaultEventCategoryColors } from '../../config';
 
 interface CalendarProps {
   currentDate: Date;
   selectedDate: Date;
   onSelectDate: (date: Date) => void;
   events: CalendarEvent[];
+  locale?: Locale;
+  weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+  noDataLabel?: string;
+  eventCategoryColors?: Record<string, string>;
+  className?: string;
 }
 
 const buildClassName = (classes: string[]) => classes.filter(Boolean).join(' ');
 
-const Calendar: React.FC<CalendarProps> = ({ currentDate, selectedDate, onSelectDate, events }) => {
-  const start = startOfWeek(startOfMonth(currentDate), { weekStartsOn: 1 });
-  const end = endOfWeek(endOfMonth(currentDate), { weekStartsOn: 1 });
+const Calendar: React.FC<CalendarProps> = ({
+  currentDate,
+  selectedDate,
+  onSelectDate,
+  events,
+  locale = esLocale,
+  weekStartsOn = 1,
+  noDataLabel,
+  eventCategoryColors = defaultEventCategoryColors,
+  className,
+}) => {
+  const { t } = useTranslation();
+  const start = startOfWeek(startOfMonth(currentDate), { weekStartsOn });
+  const end = endOfWeek(endOfMonth(currentDate), { weekStartsOn });
 
   const days = eachDayOfInterval({ start, end });
 
   const weekDays = useMemo(
     () =>
       Array.from({ length: 7 }, (_, index) =>
-        format(addDays(startOfWeek(new Date(), { weekStartsOn: 1 }), index), 'EEEEEE', {
-          locale: es,
-        }).toUpperCase(),
+        format(addDays(startOfWeek(new Date(), { weekStartsOn }), index), 'EEEEEE', {
+          locale,
+        }).toLocaleUpperCase((locale as Locale & { code?: string }).code),
       ),
-    [],
+    [locale, weekStartsOn],
   );
 
   const eventsByDate = useMemo(() => {
     return events.reduce<Record<string, CalendarEvent[]>>((accumulator, event) => {
-      const dateKey = event.date;
+      const eventDate = event.date instanceof Date ? event.date : new Date(event.date);
+      if (Number.isNaN(eventDate.getTime())) {
+        return accumulator;
+      }
+
+      const dateKey = format(eventDate, 'yyyy-MM-dd');
       if (!accumulator[dateKey]) {
         accumulator[dateKey] = [];
       }
@@ -51,8 +74,14 @@ const Calendar: React.FC<CalendarProps> = ({ currentDate, selectedDate, onSelect
     }, {});
   }, [events]);
 
+  const resolvedNoDataLabel = noDataLabel ?? t('ui.calendar.noData');
+
   return (
-    <div className="rounded-2xl border border-slate-200/80 dark:border-slate-700/60 bg-white dark:bg-slate-900 p-4">
+    <div
+      className={
+        `rounded-2xl border border-slate-200/80 dark:border-slate-700/60 bg-white dark:bg-slate-900 p-4 ${className ?? ''}`.trim()
+      }
+    >
       <div className="grid grid-cols-7 gap-2 text-center text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">
         {weekDays.map((weekDay) => (
           <span key={weekDay}>{weekDay}</span>
@@ -66,6 +95,14 @@ const Calendar: React.FC<CalendarProps> = ({ currentDate, selectedDate, onSelect
           const inCurrentMonth = isSameMonth(day, currentDate);
           const today = isToday(day);
           const additionalCount = Math.max(0, dayEvents.length - 3);
+          const formattedDate = format(day, 'd MMMM yyyy', { locale });
+          const eventsList = dayEvents.length
+            ? dayEvents.map((event) => event.title).join(', ')
+            : resolvedNoDataLabel;
+          const ariaLabel = t('ui.calendar.dayLabel', {
+            date: formattedDate,
+            eventsList,
+          });
 
           const dayClasses = buildClassName([
             'aspect-square',
@@ -94,10 +131,6 @@ const Calendar: React.FC<CalendarProps> = ({ currentDate, selectedDate, onSelect
               : 'hover:border-indigo-200 dark:hover:border-indigo-500/50',
           ]);
 
-          const eventLabel = dayEvents.length
-            ? `Eventos: ${dayEvents.map((event) => event.title).join(', ')}`
-            : 'Sin eventos';
-
           return (
             <button
               key={dateKey}
@@ -105,7 +138,7 @@ const Calendar: React.FC<CalendarProps> = ({ currentDate, selectedDate, onSelect
               className={dayClasses}
               onClick={() => onSelectDate(day)}
               aria-pressed={isSelected}
-              aria-label={`${format(day, 'd MMMM yyyy', { locale: es })}. ${eventLabel}`}
+              aria-label={ariaLabel}
             >
               <span className="font-semibold">{format(day, 'd')}</span>
               <div className="flex flex-wrap justify-center gap-1">
@@ -116,7 +149,7 @@ const Calendar: React.FC<CalendarProps> = ({ currentDate, selectedDate, onSelect
                       'h-1.5',
                       'w-1.5',
                       'rounded-full',
-                      eventCategoryColors[event.category] || 'bg-slate-400',
+                      eventCategoryColors[event.category] || 'bg-slate-400 dark:bg-slate-500',
                     ])}
                     aria-hidden="true"
                     title={event.title}

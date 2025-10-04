@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useId } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Button from './Button';
 import { AlertTriangle } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useFocusTrap } from '../../hooks/useFocusTrap';
 
 interface ConfirmDialogProps {
@@ -13,7 +14,10 @@ interface ConfirmDialogProps {
 }
 
 const ConfirmDialog: React.FC<ConfirmDialogProps> = ({ isOpen, onClose, onConfirm, title, message }) => {
-    const trapRef = useFocusTrap<HTMLDivElement>();
+    const { t } = useTranslation();
+    const titleId = useId();
+    const descriptionId = useId();
+    const trapRef = useFocusTrap<HTMLDivElement>(isOpen);
 
     return (
         <AnimatePresence>
@@ -30,25 +34,28 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({ isOpen, onClose, onConfir
                         initial={{ scale: 0.9, y: 20 }}
                         animate={{ scale: 1, y: 0 }}
                         exit={{ scale: 0.9, y: 20 }}
-                        role="alertdialog"
+                        role="dialog"
                         aria-modal="true"
-                        aria-labelledby="dialog-title"
-                        aria-describedby="dialog-description"
+                        aria-labelledby={titleId}
+                        aria-describedby={message ? descriptionId : undefined}
                         className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl w-full max-w-md"
                         onClick={(e) => e.stopPropagation()}
+                        tabIndex={-1}
                     >
                         <div className="p-6 flex items-start gap-4">
                             <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-amber-100 dark:bg-amber-500/20 sm:mx-0 sm:h-10 sm:w-10">
                                 <AlertTriangle className="h-6 w-6 text-amber-600 dark:text-amber-400" aria-hidden="true" />
                             </div>
                             <div className="flex-1">
-                                <h3 id="dialog-title" className="text-lg font-bold text-slate-800 dark:text-slate-100">{title}</h3>
-                                <p id="dialog-description" className="text-sm text-slate-500 dark:text-slate-400 mt-2">{message}</p>
+                                <h3 id={titleId} className="text-lg font-bold text-slate-800 dark:text-slate-100">{title}</h3>
+                                {message ? (
+                                    <p id={descriptionId} className="text-sm text-slate-500 dark:text-slate-400 mt-2">{message}</p>
+                                ) : null}
                             </div>
                         </div>
                         <div className="bg-slate-50 dark:bg-slate-800/50 px-6 py-4 flex justify-end gap-2 rounded-b-2xl">
-                            <Button variant="secondary" aria-label="Cancelar" onClick={onClose}>Cancelar</Button>
-                            <Button variant="primary" aria-label="Confirmar" onClick={onConfirm}>Confirmar</Button>
+                            <Button variant="secondary" onClick={onClose}>{t('ui.dialog.cancel')}</Button>
+                            <Button variant="primary" onClick={onConfirm}>{t('ui.dialog.confirm')}</Button>
                         </div>
                     </motion.div>
                 </motion.div>
