@@ -1,12 +1,14 @@
 import React from 'react';
 import { X } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 type TagVariant = 'default' | 'success' | 'warning' | 'danger' | 'info';
 
 interface TagProps {
   children: React.ReactNode;
   variant?: TagVariant;
-  icon?: React.ElementType;
+  icon?: LucideIcon;
   onRemove?: () => void;
   className?: string;
   removableLabel?: string;
@@ -22,14 +24,10 @@ const VARIANT_STYLES: Record<TagVariant, string> = {
 
 const buildClassName = (classes: string[]) => classes.filter(Boolean).join(' ');
 
-const Tag: React.FC<TagProps> = ({
-  children,
-  variant = 'default',
-  icon: Icon,
-  onRemove,
-  className,
-  removableLabel = 'Quitar etiqueta',
-}) => {
+const Tag: React.FC<TagProps> = ({ children, variant = 'default', icon: Icon, onRemove, className, removableLabel }) => {
+  const { t } = useTranslation();
+  const removeLabel = removableLabel ?? t('ui.tag.removeLabel');
+
   const containerClassName = buildClassName([
     'inline-flex',
     'items-center',
@@ -51,9 +49,12 @@ const Tag: React.FC<TagProps> = ({
       {onRemove ? (
         <button
           type="button"
-          onClick={onRemove}
+          onClick={(event) => {
+            event.stopPropagation();
+            onRemove?.();
+          }}
           className="ml-1 rounded-full p-1 transition-colors hover:bg-black/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-indigo-500 dark:hover:bg-white/10"
-          aria-label={removableLabel}
+          aria-label={removeLabel}
         >
           <X size={12} aria-hidden="true" />
         </button>

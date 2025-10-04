@@ -1,6 +1,7 @@
-import React, { useEffect, ReactNode } from 'react';
+import React, { useEffect, ReactNode, useId } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useFocusTrap } from '../../hooks/useFocusTrap';
 
 interface DrawerProps {
@@ -11,17 +12,30 @@ interface DrawerProps {
 }
 
 const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose, title, children }) => {
-  const trapRef = useFocusTrap<HTMLDivElement>();
+  const { t } = useTranslation();
+  const titleId = useId();
+  const trapRef = useFocusTrap<HTMLDivElement>(isOpen);
 
   useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose();
       }
     };
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
     document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [onClose]);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isOpen, onClose]);
 
   return (
     <AnimatePresence>
@@ -37,7 +51,7 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose, title, children }) => 
             ref={trapRef}
             role="dialog"
             aria-modal="true"
-            aria-labelledby="drawer-title"
+            aria-labelledby={titleId}
             tabIndex={-1}
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
@@ -47,12 +61,12 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose, title, children }) => 
             onClick={(e) => e.stopPropagation()}
           >
             <header className="p-6 border-b border-slate-200 dark:border-slate-700 shrink-0 flex justify-between items-center">
-              <h2 id="drawer-title" className="text-2xl font-bold text-slate-800 dark:text-slate-100">
+              <h2 id={titleId} className="text-2xl font-bold text-slate-800 dark:text-slate-100">
                 {title}
               </h2>
               <button
                 onClick={onClose}
-                aria-label="Cerrar panel"
+                aria-label={t('ui.drawer.closeLabel')}
                 className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
               >
                 <X size={20} />

@@ -13,6 +13,8 @@ interface KpiCardProps {
   active?: boolean;
   onClick?: () => void;
   className?: string;
+  iconSize?: number;
+  isToggle?: boolean;
 }
 
 const buildClassName = (classes: string[]) => classes.filter(Boolean).join(' ');
@@ -27,9 +29,13 @@ const KpiCard: React.FC<KpiCardProps> = ({
   active = false,
   onClick,
   className,
+  iconSize = 28,
+  isToggle = false,
 }) => {
   const isGradient = variant === 'gradient';
   const Tag = (onClick ? 'button' : 'div') as 'button' | 'div';
+  const gradientFallback = 'from-indigo-500 to-purple-600';
+  const gradientClasses = color && /from-[\w-]+.*to-[\w-]+/.test(color) ? color : gradientFallback;
 
   const containerClassName = buildClassName([
     'rounded-2xl',
@@ -46,7 +52,7 @@ const KpiCard: React.FC<KpiCardProps> = ({
       ? buildClassName([
           'text-white',
           'bg-gradient-to-br',
-          color || 'from-indigo-500 to-purple-600',
+          gradientClasses,
           'shadow-lg',
         ])
       : 'bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/60',
@@ -92,7 +98,7 @@ const KpiCard: React.FC<KpiCardProps> = ({
     ? ({
         onClick,
         type: 'button',
-        'aria-pressed': active,
+        ...(isToggle ? { 'aria-pressed': active } : {}),
       } as const)
     : ({} as const);
 
@@ -104,7 +110,7 @@ const KpiCard: React.FC<KpiCardProps> = ({
           <span className={valueClassName}>{value}</span>
         </div>
         <div className={iconWrapperClassName} aria-hidden="true">
-          <Icon size={28} />
+          <Icon size={iconSize} />
         </div>
       </div>
       {description ? <p className={descriptionClassName}>{description}</p> : null}

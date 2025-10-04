@@ -1,45 +1,57 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef } from 'react';
 
-export const useFocusTrap = <T extends HTMLElement>() => {
+const FOCUSABLE_SELECTORS =
+  'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+
+export const useFocusTrap = <T extends HTMLElement>(isActive: boolean) => {
   const ref = useRef<T>(null);
 
-  const handleFocus = useCallback((e: KeyboardEvent) => {
-    if (e.key !== 'Tab' || !ref.current) {
+  useEffect(() => {
+    if (!isActive) {
       return;
     }
 
-    const focusableElements = ref.current.querySelectorAll<HTMLElement>(
-      'a[href], button:not([disabled]), textarea, input, select'
-    );
-    
-    if (focusableElements.length === 0) return;
+    const node = ref.current;
 
-    const firstElement = focusableElements[0];
-    const lastElement = focusableElements[focusableElements.length - 1];
+    if (!node) {
+      return;
+    }
 
-    if (e.shiftKey) {
-      if (document.activeElement === firstElement) {
-        lastElement.focus();
-        e.preventDefault();
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Tab') {
+        return;
       }
-    } else {
-      if (document.activeElement === lastElement) {
+
+      const focusableElements = node.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTORS);
+
+      if (focusableElements.length === 0) {
+        return;
+      }
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (event.shiftKey) {
+        if (document.activeElement === firstElement) {
+          lastElement.focus();
+          event.preventDefault();
+        }
+      } else if (document.activeElement === lastElement) {
         firstElement.focus();
-        e.preventDefault();
+        event.preventDefault();
       }
-    }
-  }, []);
-
-  useEffect(() => {
-    const currentRef = ref.current;
-    if (currentRef) {
-      currentRef.focus();
-      document.addEventListener('keydown', handleFocus);
-    }
-    return () => {
-      document.removeEventListener('keydown', handleFocus);
     };
-  }, [handleFocus]);
+
+    node.focus();
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      previouslyFocused?.focus?.();
+    };
+  }, [isActive]);
 
   return ref;
 };

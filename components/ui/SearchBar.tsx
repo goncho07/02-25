@@ -1,18 +1,69 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useMemo } from 'react';
 import { Search } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useUIStore } from '../../store/uiStore';
 import Input from './Input';
 
 const SearchBar: React.FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { isCommandMenuOpen, setCommandMenuOpen } = useUIStore();
-  
-  useEffect(() => {
-    if (isCommandMenuOpen && inputRef.current) {
-      inputRef.current.focus();
-      inputRef.current.select();
-      setCommandMenuOpen(false); // Reset state after focusing
+  const { t } = useTranslation();
+
+  const shortcut = useMemo(() => {
+    if (typeof navigator === 'undefined') {
+      return 'Ctrl+K';
     }
+
+    return /mac/i.test(navigator.userAgent) ? '⌘K' : 'Ctrl+K';
+  }, []);
+
+  useEffect(() => {
+    if (!isCommandMenuOpen) {
+      return;
+    }
+
+    let frame: number | null = null;
+    let cancelled = false;
+
+    const schedule =
+      typeof window !== 'undefined' && typeof window.requestAnimationFrame === 'function'
+        ? window.requestAnimationFrame.bind(window)
+        : (callback: FrameRequestCallback) => setTimeout(() => callback(performance.now()), 0);
+
+    const cancelSchedule = (handle: number | null) => {
+      if (handle === null) {
+        return;
+      }
+      if (typeof window !== 'undefined' && typeof window.cancelAnimationFrame === 'function') {
+        window.cancelAnimationFrame(handle);
+      } else {
+        clearTimeout(handle);
+      }
+    };
+
+    const focusInput = () => {
+      if (cancelled) {
+        return;
+      }
+
+      const node = inputRef.current;
+
+      if (node) {
+        node.focus();
+        node.select();
+        setCommandMenuOpen(false);
+        return;
+      }
+
+      frame = schedule(focusInput);
+    };
+
+    frame = schedule(focusInput);
+
+    return () => {
+      cancelled = true;
+      cancelSchedule(frame);
+    };
   }, [isCommandMenuOpen, setCommandMenuOpen]);
 
   return (
@@ -21,8 +72,8 @@ const SearchBar: React.FC = () => {
       <Input
         ref={inputRef}
         type="text"
-        aria-label="Buscar por nombre, DNI o rol"
-        placeholder="Buscar por nombre, DNI o rol… (Ctrl/Cmd+K)"
+        aria-label={t('ui.search.aria')}
+        placeholder={t('ui.search.placeholder', { shortcut })}
         className="!pl-11"
       />
     </div>

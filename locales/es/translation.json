@@ -86,5 +86,32 @@
   },
   "placeholders": {
     "newUser": "Nuevo usuario"
+  },
+  "ui": {
+    "breadcrumbs": {
+      "ellipsis": "…",
+      "ariaLabel": "Ruta de navegación"
+    },
+    "calendar": {
+      "noData": "Sin eventos",
+      "dayLabel": "{{date}}. {{eventsList}}"
+    },
+    "dialog": {
+      "cancel": "Cancelar",
+      "confirm": "Confirmar"
+    },
+    "drawer": {
+      "closeLabel": "Cerrar panel"
+    },
+    "chart": {
+      "noData": "Sin datos disponibles"
+    },
+    "search": {
+      "placeholder": "Buscar por nombre, DNI o rol… ({{shortcut}})",
+      "aria": "Buscar por nombre, DNI o rol"
+    },
+    "tag": {
+      "removeLabel": "Quitar etiqueta"
+    }
   }
 }

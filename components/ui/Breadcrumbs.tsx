@@ -30,21 +30,35 @@ const BREADCRUMB_LABELS: BreadcrumbConfig = {
   [ROUTES.director.coexistence]: 'navigation.director.coexistence',
 };
 
-const formatFallbackLabel = (path: string) => {
+const safeDecode = (value: string) => {
+  try {
+    return decodeURIComponent(value);
+  } catch (error) {
+    return value;
+  }
+};
+
+const defaultFallbackFormatter = (path: string) => {
   const segments = path.split('/').filter(Boolean);
   const lastSegment = segments[segments.length - 1] || '';
+  const decodedSegment = safeDecode(lastSegment).replace(/-/g, ' ');
 
-  return decodeURIComponent(lastSegment)
-    .replace(/-/g, ' ')
-    .replace(/\b\p{L}/gu, (match) => match.toUpperCase());
+  return decodedSegment.replace(/\b\p{L}/gu, (match) => match.toLocaleUpperCase());
 };
 
 interface BreadcrumbItem {
   path: string;
   label: string;
+  isEllipsis?: boolean;
 }
 
-const Breadcrumbs: React.FC = () => {
+interface BreadcrumbsProps {
+  fallbackFormatter?: (path: string) => string;
+  maxItems?: number;
+  className?: string;
+}
+
+const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ fallbackFormatter = defaultFallbackFormatter, maxItems, className }) => {
   const location = useLocation();
   const { t } = useTranslation();
 
@@ -55,10 +69,10 @@ const Breadcrumbs: React.FC = () => {
     const allPaths = ['/', ...cumulativePaths];
     const uniquePaths = Array.from(new Set(allPaths));
 
-    return uniquePaths
+    const mappedBreadcrumbs = uniquePaths
       .map<BreadcrumbItem | null>((path) => {
         const labelKey = BREADCRUMB_LABELS[path];
-        const label = labelKey ? t(labelKey) : formatFallbackLabel(path);
+        const label = labelKey ? t(labelKey) : fallbackFormatter(path);
 
         if (!label) {
           return null;
@@ -67,27 +81,52 @@ const Breadcrumbs: React.FC = () => {
         return { path, label };
       })
       .filter((item): item is BreadcrumbItem => Boolean(item));
-  }, [location.pathname, t]);
+
+    if (!maxItems || mappedBreadcrumbs.length <= maxItems) {
+      return mappedBreadcrumbs;
+    }
+
+    if (maxItems <= 2) {
+      return mappedBreadcrumbs.slice(mappedBreadcrumbs.length - maxItems);
+    }
+
+    const itemsToShowAfterEllipsis = maxItems - 2;
+    const tailItems = mappedBreadcrumbs.slice(-itemsToShowAfterEllipsis);
+
+    return [
+      mappedBreadcrumbs[0],
+      { path: 'ellipsis', label: t('ui.breadcrumbs.ellipsis', '…'), isEllipsis: true },
+      ...tailItems,
+    ];
+  }, [fallbackFormatter, location.pathname, maxItems, t]);
 
   if (breadcrumbs.length <= 1) {
     return null;
   }
 
   return (
-    <nav aria-label="Breadcrumb" className="mb-6" data-testid="breadcrumbs">
+    <nav
+      aria-label={t('ui.breadcrumbs.ariaLabel', 'Breadcrumb')}
+      className={`mb-6 ${className ?? ''}`.trim()}
+      data-testid="breadcrumbs"
+    >
       <ol className="flex flex-wrap items-center gap-1 text-sm text-slate-500 dark:text-slate-400">
         {breadcrumbs.map((crumb, index) => {
           const isLast = index === breadcrumbs.length - 1;
 
           return (
-            <li key={crumb.path} className="flex items-center">
+            <li key={crumb.path || `${crumb.label}-${index}`} className="flex items-center">
               {index > 0 && (
                 <ChevronRight
                   aria-hidden="true"
                   className="mx-2 h-4 w-4 text-slate-400 dark:text-slate-600"
                 />
               )}
-              {isLast ? (
+              {crumb.isEllipsis ? (
+                <span className="font-semibold text-slate-600 dark:text-slate-200" aria-hidden="true">
+                  {crumb.label}
+                </span>
+              ) : isLast ? (
                 <span className="font-semibold text-slate-600 dark:text-slate-200" aria-current="page">
                   {crumb.label}
                 </span>
