@@ -5,11 +5,11 @@ import { track } from '../analytics/track';
 
 // New Architecture Components
 import ModulePage from '../layouts/ModulePage';
-import FilterBar from '../ui/FilterBar';
-import Table from '../ui/Table';
-import Button from '../ui/Button';
-import BulkBar from '../ui/BulkBar';
-import IconButton from '../ui/IconButton';
+import FilterBar from '../components/ui/FilterBar';
+import Table from '../components/ui/Table';
+import Button from '../components/ui/Button';
+import BulkBar from '../components/ui/BulkBar';
+import IconButton from '../components/ui/IconButton';
 
 type ResourceTab = 'inventario' | 'prestamos' | 'reservas';
 

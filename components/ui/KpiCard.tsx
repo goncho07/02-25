@@ -1,1 +1,1 @@
-export { default } from '../../ui/KpiCard';
+export { default } from '../ui/KpiCard';

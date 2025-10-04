@@ -9,8 +9,8 @@ import { track } from '../analytics/track';
 
 // New Architecture Components
 import ModulePage from '../layouts/ModulePage';
-import Button from '../ui/Button';
-import Card from '../ui/Card';
+import Button from '../components/ui/Button';
+import Card from '../components/ui/Card';
 
 const ActivityLogPage: React.FC = () => {
     const [logs] = useState<ActivityLog[]>(initialActivityLogs);

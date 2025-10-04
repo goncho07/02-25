@@ -1,1 +1,1 @@
-export { default } from '../../ui/DynamicChart';
+export { default } from '../ui/DynamicChart';

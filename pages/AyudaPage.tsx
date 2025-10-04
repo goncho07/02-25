@@ -5,8 +5,8 @@ import { track } from '../analytics/track';
 
 // New Architecture Components
 import ModulePage from '../layouts/ModulePage';
-import Card from '../ui/Card';
-import FilterBar from '../ui/FilterBar';
+import Card from '../components/ui/Card';
+import FilterBar from '../components/ui/FilterBar';
 
 const faqData = { 'Primeros Pasos': [{ q: '¿Cómo restauro mi contraseña?', a: '...' }], 'Gestión de Asistencia': [{ q: '¿Cómo se justifica una inasistencia?', a: '...' }] };
 type FaqCategory = keyof typeof faqData;

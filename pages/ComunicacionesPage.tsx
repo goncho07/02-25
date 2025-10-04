@@ -5,9 +5,9 @@ import { track } from '../analytics/track';
 
 // New Architecture Components
 import ModulePage from '../layouts/ModulePage';
-import FilterBar from '../ui/FilterBar';
-import Button from '../ui/Button';
-import IconButton from '../ui/IconButton';
+import FilterBar from '../components/ui/FilterBar';
+import Button from '../components/ui/Button';
+import IconButton from '../components/ui/IconButton';
 
 const mockMessages = [
   { id: 1, from: 'Dirección Académica', subject: 'Recordatorio: Cierre de Notas del 2do Bimestre', snippet: 'Estimados docentes, se les recuerda que la fecha límite para el registro de notas...', timestamp: 'hace 2 horas', read: false, folder: 'inbox' },

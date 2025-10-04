@@ -3,59 +3,19 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Users, BookOpen, MessageSquare, FileSpreadsheet, QrCode, TrendingUp, AlertTriangle, FileText, Calendar, Expand, ChevronLeft, ChevronRight, X, Plus, Circle, CircleDot, CheckCircle2, Building, Flag } from 'lucide-react';
-import KpiCard from '../ui/KpiCard';
+import { Calendar, Expand, ChevronLeft, ChevronRight, X, Plus, Circle, CircleDot, CheckCircle2, Building, Flag } from 'lucide-react';
+import KpiCard from '../components/ui/KpiCard';
 import { mockEvents } from '../data/events';
-import { format, isFuture, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isToday, isSameDay, addMonths, endOfWeek } from 'date-fns';
+import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isToday, isSameDay, addMonths, endOfWeek } from 'date-fns';
 import parseISO from 'date-fns/parseISO';
 import startOfToday from 'date-fns/startOfToday';
 import startOfWeek from 'date-fns/startOfWeek';
 import subMonths from 'date-fns/subMonths';
 import es from 'date-fns/locale/es';
-import FullCalendar from '../ui/Calendar';
+import FullCalendar from '../components/ui/Calendar';
 import { CalendarEvent } from '../types';
-import Button from '../ui/Button';
-
-const kpiData = [
-  { title: 'Matrícula Activa', value: 1681, icon: Users, color: 'from-sky-600 to-blue-800' },
-  { title: 'Asistencia Hoy', value: '94%', icon: TrendingUp, color: 'from-emerald-600 to-teal-800' },
-  { title: 'Incidencias Diarias', value: 3, icon: AlertTriangle, color: 'from-rose-600 to-red-800' },
-  { title: 'Actas Pendientes', value: 4, icon: FileText, color: 'from-amber-600 to-orange-800' },
-];
-
-const quickActions = [
-  { text: 'Tomar Asistencia QR', icon: QrCode, path: '/asistencia/scan' },
-  { text: 'Revisar Carga de Notas', icon: BookOpen, path: '/academico/avance-docentes' },
-  { text: 'Enviar Comunicado', icon: MessageSquare, path: '/comunicaciones' },
-  { text: 'Generar Reporte UGEL', icon: FileSpreadsheet, path: '/reportes' },
-];
-
-const taskItems = [
-  { text: 'Aprobar acta de 5to Grado "A"', status: 'Pendiente', priority: 'high' },
-  { text: 'Revisar solicitud de traslado de L. Mendoza', status: 'Pendiente', priority: 'medium' },
-  { text: 'Preparar informe de asistencia mensual', status: 'En progreso', priority: 'medium' },
-  { text: 'Planificar reunión de personal para el 05/08', status: 'Completo', priority: 'low' },
-];
-
-const eventCategoryColors: Record<string, string> = {
-    Examen: 'bg-amber-500',
-    Feriado: 'bg-rose-500',
-    Reunión: 'bg-indigo-500',
-    Actividad: 'bg-emerald-500',
-    UGEL: 'bg-violet-500',
-    Cívico: 'bg-sky-500',
-    Gestión: 'bg-slate-500',
-};
-
-const fullEventCategoryColors: Record<string, string> = {
-    Examen: 'border-amber-500',
-    Feriado: 'border-rose-500',
-    Reunión: 'border-indigo-500',
-    Actividad: 'border-emerald-500',
-    UGEL: 'border-violet-500',
-    Cívico: 'border-sky-500',
-    Gestión: 'border-slate-500',
-};
+import Button from '../components/ui/Button';
+import { kpiData, quickActions, taskItems, eventCategoryColors, fullEventCategoryColors } from '../config';
 
 const CalendarModal: React.FC<{ isOpen: boolean, onClose: () => void }> = ({ isOpen, onClose }) => {
     const [currentDate, setCurrentDate] = useState(new Date(2025, 0, 1));

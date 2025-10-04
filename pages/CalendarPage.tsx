@@ -8,9 +8,9 @@ import subMonths from 'date-fns/subMonths';
 import parseISO from 'date-fns/parseISO';
 import startOfToday from 'date-fns/startOfToday';
 import es from 'date-fns/locale/es';
-import PageHeader from '../ui/PageHeader';
-import Calendar from '../ui/Calendar';
-import Button from '../ui/Button';
+import PageHeader from '../components/ui/PageHeader';
+import Calendar from '../components/ui/Calendar';
+import Button from '../components/ui/Button';
 import { mockEvents } from '../data/events';
 import { CalendarEvent } from '../types';
 

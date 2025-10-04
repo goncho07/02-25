@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Button from '../../ui/Button';
+import Button from '../ui/Button';
 import { ScheduleModalState, GenericUser } from '../../types';
 
 interface ScheduleDeactivationModalProps extends ScheduleModalState {

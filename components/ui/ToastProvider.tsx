@@ -2,7 +2,7 @@ import React from 'react';
 import { Toaster, ToastBar, toast } from 'react-hot-toast';
 import { motion } from 'framer-motion';
 import { CheckCircle, AlertCircle, X, Info } from 'lucide-react';
-import { tokens } from '../design/tokens';
+import { tokens } from '../../design/tokens';
 
 const ToastProvider = () => {
   return (

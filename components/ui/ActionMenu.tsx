@@ -1,1 +1,1 @@
-export { default } from '../../ui/ActionMenu';
+export { default } from '../ui/ActionMenu';

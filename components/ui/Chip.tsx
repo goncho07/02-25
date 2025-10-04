@@ -1,6 +1,6 @@
 import React, { ButtonHTMLAttributes, ReactNode } from 'react';
 import { X } from 'lucide-react';
-import { tokens } from '../design/tokens';
+import { tokens } from '../../design/tokens';
 
 interface ChipProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;

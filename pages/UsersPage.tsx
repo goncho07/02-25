@@ -17,7 +17,7 @@ import { generateCarnet } from '../utils/pdfGenerator';
 
 // New Architecture Components
 import ModulePage from '../layouts/ModulePage';
-import Button from '../ui/Button';
+import Button from '../components/ui/Button';
 import UserKpiCards from '../components/users/UserKpiCards';
 import UserListHeader from '../components/users/UserListHeader';
 import UserTable from '../components/users/UserTable';

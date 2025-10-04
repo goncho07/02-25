@@ -5,9 +5,9 @@ import { track } from '../analytics/track';
 
 // New Architecture Components
 import ModulePage from '../layouts/ModulePage';
-import KpiCard from '../ui/KpiCard';
-import DynamicChart from '../ui/DynamicChart';
-import Button from '../ui/Button';
+import KpiCard from '../components/ui/KpiCard';
+import DynamicChart from '../components/ui/DynamicChart';
+import Button from '../components/ui/Button';
 
 type ReportTab = 'asistencia' | 'matricula' | 'academico';
 
