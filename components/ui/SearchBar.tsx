@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { Search } from 'lucide-react';
-import { useUIStore } from '../store/uiStore';
+import { useUIStore } from '../../store/uiStore';
 import Input from './Input';
 
 const SearchBar: React.FC = () => {

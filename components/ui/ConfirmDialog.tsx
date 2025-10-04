@@ -2,7 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Button from './Button';
 import { AlertTriangle } from 'lucide-react';
-import { useFocusTrap } from '../hooks/useFocusTrap';
+import { useFocusTrap } from '../../hooks/useFocusTrap';
 
 interface ConfirmDialogProps {
   isOpen: boolean;
