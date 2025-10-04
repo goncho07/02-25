@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { UserStatus } from '../../types';
-import Button from '../../ui/Button';
+import Button from '../ui/Button';
 
 const USER_ROLES = ['Todos', 'Director', 'Administrativo', 'Docente', 'Apoyo', 'Estudiante', 'Apoderado'];
 const USER_LEVELS = ['Todos', 'Inicial', 'Primaria', 'Secundaria'];

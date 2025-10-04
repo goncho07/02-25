@@ -1,5 +1,5 @@
 import React, { InputHTMLAttributes, forwardRef } from 'react';
-import { tokens } from '../design/tokens';
+import { tokens } from '../../design/tokens';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;

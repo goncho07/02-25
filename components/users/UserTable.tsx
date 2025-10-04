@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronsUpDown, ArrowUp, ArrowDown, Eye, KeyRound, Info, Send, Search, RefreshCw, Plus, ChevronLeft, ChevronRight, User, Shield, GraduationCap, Users2, UserX, Pencil } from 'lucide-react';
 import { UserRole, UserStatus, Student, Staff, ParentTutor, GenericUser, SortConfig } from '../../types';
-import Tag from '../../ui/Tag';
-import Button from '../../ui/Button';
+import Tag from '../ui/Tag';
+import Button from '../ui/Button';
 
 const getStatusChipClass = (status: UserStatus) => {
     switch (status) {

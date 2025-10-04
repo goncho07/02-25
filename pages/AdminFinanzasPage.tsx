@@ -5,10 +5,10 @@ import { track } from '../analytics/track';
 
 // New Architecture Components
 import ModulePage from '../layouts/ModulePage';
-import Button from '../ui/Button';
-import KpiCard from '../ui/KpiCard';
-import Table from '../ui/Table';
-import Drawer from '../ui/Drawer';
+import Button from '../components/ui/Button';
+import KpiCard from '../components/ui/KpiCard';
+import Table from '../components/ui/Table';
+import Drawer from '../components/ui/Drawer';
 
 type FinanceTab = 'resumen' | 'transacciones' | 'pagos';
 const transactions = [ { id: 'T-001', date: '2025-07-28', description: 'Donación APAFA', category: 'Donaciones', type: 'Ingreso', amount: 500.00 }, { id: 'T-002', date: '2025-07-27', description: 'Material de limpieza', category: 'Mantenimiento', type: 'Gasto', amount: -150.70 } ];

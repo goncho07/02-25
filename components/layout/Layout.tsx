@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import { useUIStore } from '../../store/uiStore';
-import Breadcrumbs from '../../ui/Breadcrumbs';
+import Breadcrumbs from '../ui/Breadcrumbs';
 
 interface LayoutProps {
   children: React.ReactNode;

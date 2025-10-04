@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 // New Architecture Components
 import ModulePage from '../layouts/ModulePage';
-import Card from '../ui/Card';
+import Card from '../components/ui/Card';
 
 const settingsCards = [
     { title: 'Roles y Permisos', description: 'Cree y gestione roles de usuario para controlar el acceso a los módulos.', icon: Shield, path: '/settings/roles' },

@@ -1,1 +1,1 @@
-export { default } from '../../ui/ToastContainer';
+export { default } from '../ui/ToastContainer';

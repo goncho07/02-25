@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, File } from 'lucide-react';
 import { GenericUser } from '../../types';
-import Button from '../../ui/Button';
+import Button from '../ui/Button';
 
 interface UserImportModalProps {
     isOpen: boolean;

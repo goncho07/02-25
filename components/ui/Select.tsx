@@ -1,5 +1,5 @@
 import React, { SelectHTMLAttributes, forwardRef } from 'react';
-import { tokens } from '../design/tokens';
+import { tokens } from '../../design/tokens';
 import { ChevronDown } from 'lucide-react';
 
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {

@@ -4,7 +4,7 @@ import { User, Shield, Activity as ActivityIcon, History, X, Save, Send, Pencil,
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import es from 'date-fns/locale/es';
 import { UserStatus, ActivityLog, Student, Staff, ParentTutor, GenericUser, UserRole } from '../../types';
-import Button from '../../ui/Button';
+import Button from '../ui/Button';
 import UserProfileSummary from './UserProfileSummary';
 import FamilyGroupView from './FamilyGroupView';
 

@@ -7,8 +7,8 @@ import { track } from '../analytics/track';
 
 // New Architecture Components
 import ModulePage from '../layouts/ModulePage';
-import Button from '../ui/Button';
-import Card from '../ui/Card';
+import Button from '../components/ui/Button';
+import Card from '../components/ui/Card';
 
 const RolesPage: React.FC = () => {
     const [roles, setRoles] = useState<Role[]>(initialRoles);

@@ -3,7 +3,7 @@
 import React from 'react';
 import { GenericUser, Student, Staff, ParentTutor } from '../../types';
 import { TrendingUp, BarChart, Clock, AlertTriangle, Percent, Phone, Mail, User, Shield } from 'lucide-react';
-import Tag from '../../ui/Tag';
+import Tag from '../ui/Tag';
 
 const isStudent = (user: GenericUser): user is Student => 'studentCode' in user;
 const isStaff = (user: GenericUser): user is Staff => 'area' in user;

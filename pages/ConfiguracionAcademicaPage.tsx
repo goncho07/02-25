@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { Settings, ArrowLeft, Save } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAcademicSettingsStore, AcademicLevels } from '../store/academicSettingsStore';
-import Card from '../ui/Card';
+import Card from '../components/ui/Card';
 
 const ConfiguracionAcademicaPage: React.FC = () => {
   const navigate = useNavigate();

@@ -3,7 +3,7 @@
 import React, { useMemo } from 'react';
 import { Student, ParentTutor, GenericUser } from '../../types';
 import { Phone, Mail, User, Users } from 'lucide-react';
-import Button from '../../ui/Button';
+import Button from '../ui/Button';
 
 interface FamilyGroupViewProps {
     student: Student;

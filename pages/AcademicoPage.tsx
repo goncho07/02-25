@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 import { BookOpen, UserCheck, BookCheck, UserSearch, FileText, FileDown, Settings, ArrowRight, TrendingUp, AlertTriangle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import ModulePage from '../layouts/ModulePage';
-import KpiCard from '../ui/KpiCard';
-import Card from '../ui/Card';
+import KpiCard from '../components/ui/KpiCard';
+import Card from '../components/ui/Card';
 
 const kpiData = [
   { title: 'Avance Carga de Notas', value: '78%', icon: TrendingUp, color: 'from-emerald-600 to-teal-800' },

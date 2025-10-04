@@ -1,1 +1,1 @@
-export { default } from '../../ui/Tag';
+export { default } from '../ui/Tag';

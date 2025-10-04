@@ -5,7 +5,7 @@ import { track } from '../analytics/track';
 
 // New Architecture Components
 import ModulePage from '../layouts/ModulePage';
-import Card from '../ui/Card';
+import Card from '../components/ui/Card';
 
 const mockActas = [
   { id: 'ACT-001', grade: 'Quinto Grado "A"', status: 'Pendiente de Aprobación', requestedBy: 'A. Barreto', date: '2025-07-28' },

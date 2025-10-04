@@ -7,9 +7,9 @@ import { track } from '../analytics/track';
 
 // New Architecture Components
 import ModulePage from '../layouts/ModulePage';
-import FilterBar from '../ui/FilterBar';
-import Table from '../ui/Table';
-import Button from '../ui/Button';
+import FilterBar from '../components/ui/FilterBar';
+import Table from '../components/ui/Table';
+import Button from '../components/ui/Button';
 
 interface TeacherProgress extends Staff {
   progress: number;
